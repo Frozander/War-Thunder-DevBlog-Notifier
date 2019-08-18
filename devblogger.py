@@ -20,6 +20,11 @@ new_titles = []
 elapsed_time = 0
 max_hours = 24
 
+toaster.show_toast('Notifier Started',
+                    'We will get you the news!',
+                    icon_path='./icon.ico',
+                    duration=5)
+
 top_news = driver.find_elements_by_class_name('news-item__title')
 for news in top_news:
     titles.append(news.text)
