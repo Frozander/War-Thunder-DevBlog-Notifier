@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from win10toast import ToastNotifier
 import time
 from os import sys
@@ -7,9 +8,9 @@ from os import sys
 toaster = ToastNotifier()
 
 # Driver Options and Path
-options = webdriver.ChromeOptions()
+options = Options()
 options.add_argument('headless')
-driver = webdriver.Chrome(executable_path="C:/Users/batub/Desktop/chromedriver/chromedriver.exe",chrome_options=options)
+driver = webdriver.Chrome(executable_path="C:/Users/batub/Desktop/chromedriver/chromedriver.exe",options=options)
 
 target_URL = 'https://warthunder.com/en/news/?tags=Development'
 
