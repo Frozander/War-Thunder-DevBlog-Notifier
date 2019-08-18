@@ -32,6 +32,8 @@ for news in top_news:
     titles.append(news.text)
 
 def notifier():
+    driver.refresh()
+    
     top_news = driver.find_elements_by_class_name('news-item__title')
     for news in top_news:
         titles.append(news.text)
