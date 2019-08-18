@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from win10toast import ToastNotifier
 import time
+import pprint
 from os import sys
 
 #Toaster
@@ -21,6 +22,7 @@ titles = []
 new_titles = []
 elapsed_time = 0
 max_hours = 24
+pp = pprint.PrettyPrinter(indent=4)
 
 toaster.show_toast('Notifier Started',
                     'We will get you the news!',
@@ -43,11 +45,15 @@ while True:
     new_titles.sort()
     titles.sort()
     
-    if new_titles == titles:
+    comparison = set(new_titles).difference(titles)
+    
+    if not(bool(comparison)):
         new_titles.clear()
         time.sleep(3600)
         elapsed_time += 3600
     else:
+        pp.pprint("Here are the changes:")
+        pp.pprint(comparison)
         toaster.show_toast('New Devblog on War Thunder!',
                         'They released something new!',
                         icon_path='./icon.ico')
