@@ -1,6 +1,7 @@
 from selenium import webdriver
 from win10toast import ToastNotifier
 import time
+from os import sys
 
 #Toaster
 toaster = ToastNotifier()
@@ -25,33 +26,46 @@ toaster.show_toast('DevBlog Notifier has Started!',
                    icon_path='./icon.ico',
                    duration=5)
 
-top_news = driver.find_elements_by_class_name('news-item__title')
-for news in top_news:
-    titles.append(news.text)
-
-while True:
-    
-    if elapsed_time >= (3600 * max_hours):
-        break
-    
+def notifier():
     top_news = driver.find_elements_by_class_name('news-item__title')
     for news in top_news:
-        new_titles.append(news.text)
-    
-    new_titles.sort()
-    titles.sort()
-    
-    if new_titles == titles:
-        new_titles.clear()
-        time.sleep(3600)
-        elapsed_time += 3600
-    else:
-        toaster.show_toast('New Devblog on War Thunder!',
-                           'They released something new!',
-                           icon_path='./icon.ico')
-        titles.clear()
-        titles = new_titles
-        new_titles.clear()
+        titles.append(news.text)
+
+    while True:
+        
+        if elapsed_time >= (3600 * max_hours):
+            sys.exit()
+        
+        
+        top_news = driver.find_elements_by_class_name('news-item__title')
+        for news in top_news:
+            new_titles.append(news.text)
+        
+        new_titles.sort()
+        titles.sort()
+        
+        if new_titles == titles:
+            new_titles.clear()
+            time.sleep(3600)
+            elapsed_time += 3600
+        else:
+            toaster.show_toast('New Devblog on War Thunder!',
+                            'They released something new!',
+                            icon_path='./icon.ico')
+            titles.clear()
+            titles = new_titles
+            new_titles.clear()
     
 
-driver.close()
+try:
+    notifier()
+except KeyboardInterrupt:
+    driver.close()
+    print('Manually Exited!')
+except SystemExit:
+    driver.close()
+    print('Max Time is passed!')
+except:
+    print('Unexcpected error!')
+    
+    
