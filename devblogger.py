@@ -26,29 +26,40 @@ elapsed_time = 0
 max_hours = 24
 pp = pprint.PrettyPrinter(indent=4)
 
+#Initialization notification
 toaster.show_toast('Notifier Started',
                     'We will get you the news!',
                     icon_path='./icon.ico',
                     duration=5)
 
+#We get every title from the first page of the news and add them to our list
 top_news = driver.find_elements_by_class_name('news-item__title')
 for news in top_news:
     titles.append(news.text)
 
 while True:
     
+    #If desired working time is passed, break the loop
     if elapsed_time >= (3600 * max_hours):
         break
     
+    #Refresh the page in every loop (This happens once an hour, so no ban risk)
+    driver.refresh()
+    
+    #Get the news titles again and put them in a different list
     top_news = driver.find_elements_by_class_name('news-item__title')
     for news in top_news:
         new_titles.append(news.text)
     
+    #Sort them, just in case (Probably is not required)
     new_titles.sort()
     titles.sort()
     
+    #Get the difference between two lists for boolean transform and printing the new articles
     comparison = set(new_titles).difference(titles)
     
+    #If there is no difference between two lists, clear the second (check) list, wait for an hour and repeat
+    #If there is a difference, notify user, print the differences, replace first(control) list with second and clear it.
     if not(bool(comparison)):
         new_titles.clear()
         time.sleep(3600)
