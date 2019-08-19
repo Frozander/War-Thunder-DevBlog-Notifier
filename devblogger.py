@@ -5,16 +5,18 @@ import time
 import pprint
 from os import sys
 
+target_URL = 'https://warthunder.com/en/news/?tags=Development'
+
 #Toaster
 toaster = ToastNotifier()
 
-# Driver Options and Path
+#Driver Options
 options = Options()
 options.add_argument('headless')
+user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36'
+options.add_argument('user-agent=' + user_agent)
+# Driver Initialization
 driver = webdriver.Chrome(executable_path="C:/Users/batub/Desktop/chromedriver/chromedriver.exe",options=options)
-
-target_URL = 'https://warthunder.com/en/news/?tags=Development'
-
 driver.get(target_URL)
 
 #The Dirty Part
