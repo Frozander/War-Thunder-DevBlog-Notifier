@@ -6,6 +6,8 @@ import pprint
 from os import sys
 
 target_URL = 'https://warthunder.com/en/news/?tags=Development'
+#Change this value to represent your driver location
+driver_path = 'C:/Users/batub/Desktop/chromedriver/chromedriver.exe'
 
 #Toaster
 toaster = ToastNotifier()
@@ -16,7 +18,7 @@ options.add_argument('headless')
 user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36'
 options.add_argument('user-agent=' + user_agent)
 # Driver Initialization
-driver = webdriver.Chrome(executable_path="C:/Users/batub/Desktop/chromedriver/chromedriver.exe",options=options)
+driver = webdriver.Chrome(executable_path=driver_path,options=options)
 driver.get(target_URL)
 
 #The Dirty Part
