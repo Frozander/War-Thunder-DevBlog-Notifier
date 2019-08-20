@@ -4,6 +4,7 @@ from win10toast import ToastNotifier
 import time
 import pprint
 from os import sys
+import sys
 
 target_URL = 'https://warthunder.com/en/news/?tags=Development'
 #Change this value to represent your driver location
@@ -78,11 +79,12 @@ def main():
             titles.clear()
             titles = new_titles
             new_titles.clear()
-
     
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print('Notifier Shutdown!')
-        driver.close()
+        print('Notifier Shutdown!', file=sys.stderr)
+        driver.quit()
+        sys.exit(1)
+        
