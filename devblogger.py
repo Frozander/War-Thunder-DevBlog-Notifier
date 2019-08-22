@@ -68,15 +68,15 @@ def main():
         #If there is a difference, notify user, print the differences, replace first(control) list with second and clear it.
         if not(bool(comparison)):
             new_titles.clear()
-            time.sleep(3600)
-            elapsed_time += 3600
+            time.sleep(1800)
+            elapsed_time += 1800
         else:
             pp.pprint("Here are the changes:")
             pp.pprint(comparison)
             toaster.show_toast('New Devblog on War Thunder!',
                             'They released something new!',
                             icon_path='./icon.ico',
-                            duration=None)
+                            duration=20)
             titles.clear()
             titles = new_titles
             new_titles.clear()
