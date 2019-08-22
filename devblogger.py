@@ -75,7 +75,8 @@ def main():
             pp.pprint(comparison)
             toaster.show_toast('New Devblog on War Thunder!',
                             'They released something new!',
-                            icon_path='./icon.ico')
+                            icon_path='./icon.ico',
+                            duration=None)
             titles.clear()
             titles = new_titles
             new_titles.clear()
